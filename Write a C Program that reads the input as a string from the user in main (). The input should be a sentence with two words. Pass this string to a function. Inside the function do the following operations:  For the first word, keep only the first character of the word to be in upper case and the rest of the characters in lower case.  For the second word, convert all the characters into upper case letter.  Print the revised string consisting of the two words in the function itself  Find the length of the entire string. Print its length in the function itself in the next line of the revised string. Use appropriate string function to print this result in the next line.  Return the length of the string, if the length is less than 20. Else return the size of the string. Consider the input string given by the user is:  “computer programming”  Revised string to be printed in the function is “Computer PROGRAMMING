@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int processString(char str[]) {
+    int len = strlen(str);
+    int spaceIndex = -1;
+    
+    // Find index of space in string
+    for (int i = 0; i < len; i++) {
+        if (str[i] == ' ') {
+            spaceIndex = i;
+            break;
+        }
+    }
+    
+    // Convert first word to upper/lower case
+    for (int i = 0; i < spaceIndex; i++) {
+        if (i == 0) {
+            str[i] = toupper(str[i]);
+        } else {
+            str[i] = tolower(str[i]);
+        }
+    }
+    
+    // Convert second word to upper case
+    for (int i = spaceIndex + 1; i < len; i++) {
+        str[i] = toupper(str[i]);
+    }
+    
+    // Print revised string
+    printf("%s\n", str);
+    
+    // Print length of string using string function
+    printf("%d\n", strlen(str));
+    
+    // Return length of string or size of string based on condition
+    if (len < 20) {
+        return len;
+    } else {
+        return sizeof(str);
+    }
+}
+
+int main() {
+    char str[100];
+    
+    printf("Enter a string with two words: ");
+    fgets(str, sizeof(str), stdin);
+    
+    int result = processString(str);
+    
+    printf("Result: %d\n", result);
+    
+    return 0;
+}
